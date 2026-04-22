@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="一个适合 GitHub Pages 的极简博客模板，使用低饱和绿色作为主色调。">
+  <meta name="theme-color" content="#dce6da">
+  <title>青苔手记 | 极简 GitHub 博客</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="page-home">
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-copy">
+          <strong>青苔手记</strong>
+          <span>minimal notes for calm building</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="#posts">文章</a>
+        <a href="#about">关于</a>
+        <a href="#notes">碎片</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">GitHub Pages Ready</p>
+          <h1>把想法写得安静一点，留白多一点。</h1>
+          <p class="hero-text">
+            这是一个为 GitHub Pages 准备的极简博客模板。整体采用低饱和绿色、细边框和轻纹理背景，
+            适合记录代码、产品、设计与日常观察。
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#posts">浏览文章</a>
+            <a class="button button-secondary" href="#about">查看结构</a>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <section class="panel-card">
+            <div class="panel-copy">
+              <p class="eyebrow">Template Snapshot</p>
+              <h2>轻、稳、可直接上线。</h2>
+              <p>
+                不依赖构建工具，不需要额外安装。把这个目录推到 GitHub 仓库，
+                开启 Pages 后就能作为个人博客使用。
+              </p>
+            </div>
+            <div class="stats" aria-label="博客特性">
+              <div class="stat">
+                <strong>03</strong>
+                <span>示例文章</span>
+              </div>
+              <div class="stat">
+                <strong>100%</strong>
+                <span>静态部署</span>
+              </div>
+              <div class="stat">
+                <strong>0</strong>
+                <span>构建步骤</span>
+              </div>
+            </div>
+            <div class="meta-strip">
+              <span>风格：极简</span>
+              <span>主色：低饱和绿色</span>
+              <span>适配：桌面与移动端</span>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section id="about" class="intro-grid reveal">
+        <article class="glass-card">
+          <p class="eyebrow">About The Layout</p>
+          <h2>为长期写作留出呼吸感。</h2>
+          <p class="section-copy">
+            页面刻意减少了视觉噪声，把注意力集中在标题、摘要和正文节奏上。
+            绿色被压低了饱和度，不会显得冷，也不会显得过于情绪化。
+          </p>
+          <ul class="feature-list">
+            <li>纯静态结构，天然适合 GitHub Pages</li>
+            <li>首页展示文章列表，单篇文章独立页面</li>
+            <li>标签筛选、轻动画和响应式布局都已做好</li>
+            <li>替换文字即可作为个人博客上线</li>
+          </ul>
+        </article>
+
+        <aside class="glass-card now-card">
+          <p class="eyebrow">Now</p>
+          <h2>当前写作方向</h2>
+          <blockquote>
+            “不是为了把页面填满，而是为了让读者愿意停下来。”
+          </blockquote>
+          <div class="mini-stack">
+            <span class="pill">产品笔记</span>
+            <span class="pill">设计观察</span>
+            <span class="pill">代码练习</span>
+          </div>
+        </aside>
+      </section>
+
+      <section id="posts" class="posts-section reveal">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Latest Writing</p>
+            <h2>最近文章</h2>
+          </div>
+          <div class="section-heading-side">
+            <div id="tag-filters" class="tag-filters" aria-label="文章标签筛选"></div>
+            <span id="post-total" class="section-meta"></span>
+          </div>
+        </div>
+        <div id="post-list" class="post-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="notes" class="notes-section reveal">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Quiet Fragments</p>
+            <h2>小而明确的碎片</h2>
+          </div>
+        </div>
+        <div class="note-grid">
+          <article class="note-card">
+            <span class="note-index">01</span>
+            <h3>背景</h3>
+            <p>没有用纯色铺满，而是叠了淡绿色渐变和细网格，让页面看起来更柔和。</p>
+          </article>
+          <article class="note-card">
+            <span class="note-index">02</span>
+            <h3>动效</h3>
+            <p>只保留了进入时的轻微上浮和卡片悬停反馈，避免博客显得像展示型 landing page。</p>
+          </article>
+          <article class="note-card">
+            <span class="note-index">03</span>
+            <h3>排版</h3>
+            <p>标题用衬线字体，正文用清晰的人文无衬线，层次足够但不过度装饰。</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© <span data-year></span> 青苔手记</span>
+      <span>适合直接部署到 GitHub Pages</span>
+    </footer>
+  </div>
+</body>
+</html>
