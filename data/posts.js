@@ -1,0 +1,86 @@
+window.BLOG_POSTS = [
+  {
+    "title": "垂直领域的AI护城河：为什么RAG基础设施和小模型研发是两个确定的浪潮",
+    "slug": "vertical-ai-rag-slm-knowledge-moat",
+    "date": "2026.04.23",
+    "rawDate": "2026-04-23",
+    "updatedAt": "2026.04.23",
+    "readTime": "10 min",
+    "tags": [
+      "写作",
+      "随笔"
+    ],
+    "status": "published",
+    "category": "写作 / 随笔",
+    "summary": "垂直领域是AI商业落地的确定方向，RAG基础设施和小模型研发是构建私有知识护城河的两个互补浪潮——RAG解决\"现在就能用\"的问题，小模型解决\"长期建壁垒\"的问题。",
+    "description": "当所有人都在谈论垂直领域AI时，真正值得追问的是：壁垒究竟在哪里？本文从RAG基础设施和小模型研发两个维度，探讨如何将企业私有数据转化为有护城河的产品能力。分析了RAG市场的爆发性增长和小模型\"测试时计算\"的技术突破，揭示两者并非竞争而是互补的分层演进关系——短期靠RAG连接知识，长期靠小模型内化知识，最终形成\"小模型+RAG\"的混合架构。适合关注AI商业化路径的技术从业者和创业者阅读。",
+    "href": "posts/vertical-ai-rag-slm-knowledge-moat.html",
+    "generatedPath": "posts/vertical-ai-rag-slm-knowledge-moat.html",
+    "sourcePath": "content/posts/vertical-ai-rag-slm-knowledge-moat.md",
+    "sourceHref": "content/posts/vertical-ai-rag-slm-knowledge-moat.md",
+    "note": "草稿不会出现在首页，也不会生成公开文章页。"
+  },
+  {
+    "title": "在低噪声界面里写作",
+    "slug": "on-quiet-interfaces",
+    "date": "2026.04.22",
+    "rawDate": "2026-04-22",
+    "updatedAt": "2026.04.22",
+    "readTime": "2 min",
+    "tags": [
+      "设计",
+      "写作"
+    ],
+    "status": "published",
+    "category": "设计 / 写作",
+    "summary": "界面越克制，内容越容易被真正读进去。聊聊为什么我会把色彩、留白和信息密度同时压下来。",
+    "description": "关于低噪声界面、留白和低饱和绿色的写作笔记。",
+    "href": "posts/on-quiet-interfaces.html",
+    "generatedPath": "posts/on-quiet-interfaces.html",
+    "sourcePath": "content/posts/on-quiet-interfaces.md",
+    "sourceHref": "content/posts/on-quiet-interfaces.md",
+    "note": "下一步可以直接把这篇替换成你的真实内容。"
+  },
+  {
+    "title": "GitHub Pages 的轻量工作流",
+    "slug": "github-pages-workflow",
+    "date": "2026.04.18",
+    "rawDate": "2026-04-18",
+    "updatedAt": "2026.04.18",
+    "readTime": "1 min",
+    "tags": [
+      "GitHub",
+      "部署"
+    ],
+    "status": "published",
+    "category": "GitHub / 部署",
+    "summary": "不引入复杂框架，也能把个人博客维护得很舒服。目录怎么放、文章怎么写、怎么发，都可以很简单。",
+    "description": "一个适合 GitHub Pages 的轻量博客工作流。",
+    "href": "posts/github-pages-workflow.html",
+    "generatedPath": "posts/github-pages-workflow.html",
+    "sourcePath": "content/posts/github-pages-workflow.md",
+    "sourceHref": "content/posts/github-pages-workflow.md",
+    "note": "这个模板已经适配好 GitHub Pages 的基础场景。"
+  },
+  {
+    "title": "为什么我偏爱小工具而不是大系统",
+    "slug": "build-small-tools",
+    "date": "2026.04.10",
+    "rawDate": "2026-04-10",
+    "updatedAt": "2026.04.10",
+    "readTime": "1 min",
+    "tags": [
+      "产品",
+      "代码"
+    ],
+    "status": "published",
+    "category": "产品 / 代码",
+    "summary": "真正能长期留下来的，往往不是最大的工程，而是那些你愿意反复打开、反复改进的小东西。",
+    "description": "关于小工具、维护成本和长期使用感的一篇短文。",
+    "href": "posts/build-small-tools.html",
+    "generatedPath": "posts/build-small-tools.html",
+    "sourcePath": "content/posts/build-small-tools.md",
+    "sourceHref": "content/posts/build-small-tools.md",
+    "note": "适合继续扩展成你的个人作品集或笔记站。"
+  }
+];

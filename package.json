@@ -1,0 +1,8 @@
+{
+  "name": "github-blog",
+  "private": true,
+  "scripts": {
+    "build:posts": "node scripts/build-posts.mjs",
+    "build": "npm run build:posts"
+  }
+}

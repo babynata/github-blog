@@ -599,6 +599,15 @@ p {
   background: none;
 }
 
+.article-content a,
+.section-copy code,
+.feature-list code,
+.workflow-list code,
+.command-card code,
+.meta-code {
+  color: var(--accent-deep);
+}
+
 .article-end {
   display: flex;
   justify-content: space-between;
@@ -614,6 +623,152 @@ p {
   color: var(--accent-deep);
   text-decoration: none;
   font-weight: 600;
+}
+
+.admin-page .page-shell {
+  width: min(1120px, calc(100% - 1.5rem));
+}
+
+.admin-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+  gap: 24px;
+}
+
+.admin-main-card,
+.admin-side-card {
+  display: grid;
+  align-content: start;
+  gap: 20px;
+}
+
+.admin-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(180px, 0.7fr));
+  gap: 14px;
+}
+
+.admin-field {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.admin-input,
+.admin-select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(252, 253, 251, 0.88);
+  color: var(--ink);
+  font: inherit;
+}
+
+.admin-input:focus,
+.admin-select:focus {
+  outline: 2px solid rgba(125, 148, 126, 0.22);
+  outline-offset: 1px;
+}
+
+.admin-post-list {
+  display: grid;
+  gap: 14px;
+}
+
+.admin-post-card {
+  display: grid;
+  gap: 16px;
+  padding: 22px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: rgba(252, 253, 251, 0.84);
+}
+
+.admin-post-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.admin-post-copy {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-post-copy p:last-child {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 76px;
+  padding: 0.5rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  border: 1px solid rgba(88, 110, 90, 0.12);
+}
+
+.status-pill.is-published {
+  background: rgba(212, 224, 209, 0.76);
+  color: var(--accent-deep);
+}
+
+.status-pill.is-draft {
+  background: rgba(235, 239, 233, 0.8);
+  color: var(--muted);
+}
+
+.admin-meta-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.meta-code {
+  padding: 0.35rem 0.55rem;
+  border-radius: 10px;
+  background: rgba(223, 231, 222, 0.68);
+  font-family: "SFMono-Regular", "Consolas", "Liberation Mono", monospace;
+  font-size: 0.83rem;
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.status-note {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.workflow-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--muted);
+  line-height: 1.85;
+}
+
+.workflow-list li + li {
+  margin-top: 0.55rem;
+}
+
+.command-card {
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(88, 110, 90, 0.12);
+  background: rgba(223, 231, 222, 0.48);
 }
 
 .reveal {
@@ -644,6 +799,7 @@ main > .reveal:nth-child(4) {
 @media (max-width: 980px) {
   .hero,
   .intro-grid,
+  .admin-layout,
   .post-grid,
   .note-grid {
     grid-template-columns: 1fr;
@@ -687,8 +843,13 @@ main > .reveal:nth-child(4) {
     grid-template-columns: 1fr;
   }
 
+  .admin-controls {
+    grid-template-columns: 1fr;
+  }
+
   .section-heading,
   .post-top,
+  .admin-post-top,
   .post-footer,
   .article-end,
   .site-footer {

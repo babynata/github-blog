@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="青苔手记的文章管理台：查看文章状态、源文件与发布路径。">
+  <meta name="theme-color" content="#dce6da">
+  <title>内容台 | 青苔手记</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../data/posts.js" defer></script>
+  <script src="../script.js" defer></script>
+  <script src="admin.js" defer></script>
+</head>
+<body class="article-page admin-page">
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-copy">
+          <strong>青苔手记</strong>
+          <span>minimal notes for calm building</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="内容台导航">
+        <a href="../index.html">博客首页</a>
+        <a href="../index.html#posts">文章</a>
+        <a href="index.html">内容台</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">Content Desk</p>
+          <h1>把文章管理也做得安静一点。</h1>
+          <p class="hero-text">
+            这里是第一阶段的内容管理台：文章以 Markdown 保存，构建脚本会自动生成公开页面与首页列表。
+            你可以在这里查看状态、标签、源文件路径和发布结果。
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="../content/posts/_template.md">查看文章模板</a>
+            <a class="button button-secondary" href="../index.html">返回博客</a>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <section class="panel-card">
+            <div class="panel-copy">
+              <p class="eyebrow">Workflow</p>
+              <h2>写 Markdown，再生成站点。</h2>
+              <p>
+                这个版本没有引入数据库或在线后台，管理成本更低，也更适合 GitHub Pages。
+                发文流程会保持在 4 步以内。
+              </p>
+            </div>
+            <div class="stats" aria-label="内容统计">
+              <div class="stat">
+                <strong id="admin-total-count">00</strong>
+                <span>文章总数</span>
+              </div>
+              <div class="stat">
+                <strong id="admin-published-count">00</strong>
+                <span>已发布</span>
+              </div>
+              <div class="stat">
+                <strong id="admin-draft-count">00</strong>
+                <span>草稿</span>
+              </div>
+            </div>
+            <div class="meta-strip">
+              <span>内容源：`content/posts/*.md`</span>
+              <span>生成页：`posts/*.html`</span>
+              <span>列表数据：`data/posts.js`</span>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="reveal admin-layout">
+        <article class="glass-card admin-main-card">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Post Inventory</p>
+              <h2>文章清单</h2>
+            </div>
+            <span id="admin-visible-count" class="section-meta"></span>
+          </div>
+
+          <div class="admin-controls">
+            <label class="admin-field">
+              <span>搜索标题 / 摘要</span>
+              <input id="admin-search" class="admin-input" type="search" placeholder="输入关键词">
+            </label>
+            <label class="admin-field">
+              <span>状态</span>
+              <select id="admin-status" class="admin-select">
+                <option value="all">全部状态</option>
+                <option value="published">已发布</option>
+                <option value="draft">草稿</option>
+              </select>
+            </label>
+            <label class="admin-field">
+              <span>标签</span>
+              <select id="admin-tag" class="admin-select"></select>
+            </label>
+          </div>
+
+          <div id="admin-post-list" class="admin-post-list" aria-live="polite"></div>
+        </article>
+
+        <aside class="glass-card admin-side-card">
+          <p class="eyebrow">Publish Steps</p>
+          <h2>每次发文怎么做</h2>
+          <ol class="workflow-list">
+            <li>复制 `content/posts/_template.md` 新建文章。</li>
+            <li>填写标题、slug、日期、摘要、标签和正文。</li>
+            <li>运行 `node scripts/build-posts.mjs` 生成页面。</li>
+            <li>提交并 push 到 GitHub，Pages 会自动更新。</li>
+          </ol>
+
+          <div class="command-card">
+            <code>node scripts/build-posts.mjs</code>
+          </div>
+
+          <p class="section-copy">
+            你也可以用 `npm run build:posts`。当前版本里，`draft` 状态不会出现在首页，也不会生成公开文章页。
+          </p>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© <span data-year></span> 青苔手记</span>
+      <span>内容台：Markdown 驱动</span>
+    </footer>
+  </div>
+</body>
+</html>
