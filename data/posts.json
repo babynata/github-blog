@@ -54,12 +54,12 @@
       "设计",
       "写作"
     ],
-    "status": "published",
+    "status": "draft",
     "category": "设计 / 写作",
     "summary": "界面越克制，内容越容易被真正读进去。聊聊为什么我会把色彩、留白和信息密度同时压下来。",
     "description": "关于低噪声界面、留白和低饱和绿色的写作笔记。",
-    "href": "posts/on-quiet-interfaces.html",
-    "generatedPath": "posts/on-quiet-interfaces.html",
+    "href": null,
+    "generatedPath": null,
     "sourcePath": "content/posts/on-quiet-interfaces.md",
     "sourceHref": "content/posts/on-quiet-interfaces.md",
     "note": "下一步可以直接把这篇替换成你的真实内容。"
@@ -75,12 +75,12 @@
       "GitHub",
       "部署"
     ],
-    "status": "published",
+    "status": "draft",
     "category": "GitHub / 部署",
     "summary": "不引入复杂框架，也能把个人博客维护得很舒服。目录怎么放、文章怎么写、怎么发，都可以很简单。",
     "description": "一个适合 GitHub Pages 的轻量博客工作流。",
-    "href": "posts/github-pages-workflow.html",
-    "generatedPath": "posts/github-pages-workflow.html",
+    "href": null,
+    "generatedPath": null,
     "sourcePath": "content/posts/github-pages-workflow.md",
     "sourceHref": "content/posts/github-pages-workflow.md",
     "note": "这个模板已经适配好 GitHub Pages 的基础场景。"
@@ -96,12 +96,12 @@
       "产品",
       "代码"
     ],
-    "status": "published",
+    "status": "draft",
     "category": "产品 / 代码",
     "summary": "真正能长期留下来的，往往不是最大的工程，而是那些你愿意反复打开、反复改进的小东西。",
     "description": "关于小工具、维护成本和长期使用感的一篇短文。",
-    "href": "posts/build-small-tools.html",
-    "generatedPath": "posts/build-small-tools.html",
+    "href": null,
+    "generatedPath": null,
     "sourcePath": "content/posts/build-small-tools.md",
     "sourceHref": "content/posts/build-small-tools.md",
     "note": "适合继续扩展成你的个人作品集或笔记站。"
