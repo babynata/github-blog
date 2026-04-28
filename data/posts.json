@@ -23,6 +23,29 @@
     "note": ""
   },
   {
+    "title": "我越来越觉得，闪念贝壳真正做对的不是转写，而是语义重构",
+    "slug": "shannian-beike-semantic-rewrite-moat",
+    "date": "2026.04.28",
+    "rawDate": "2026-04-28",
+    "updatedAt": "2026.04.28",
+    "readTime": "6 min",
+    "tags": [
+      "AI",
+      "产品",
+      "语音",
+      "模型策略"
+    ],
+    "status": "published",
+    "category": "AI / 产品",
+    "summary": "我越来越觉得，闪念贝壳真正拉开差距的，不是把语音识别得更准，而是把口语化输入重构成可回看、可使用的文字成果。",
+    "description": "在我看来，闪念贝壳的价值不只是语音转文字，而是把口语重写成可阅读、可复用的内容，并很可能通过场景化模型策略把这件事做深了。",
+    "href": "posts/shannian-beike-semantic-rewrite-moat.html",
+    "generatedPath": "posts/shannian-beike-semantic-rewrite-moat.html",
+    "sourcePath": "content/posts/shannian-beike-semantic-rewrite-moat.md",
+    "sourceHref": "content/posts/shannian-beike-semantic-rewrite-moat.md",
+    "note": "这是我对 AI 原生输入产品的一次阶段性判断。"
+  },
+  {
     "title": "垂直领域的AI护城河：为什么RAG基础设施和小模型研发是两个确定的浪潮",
     "slug": "vertical-ai-rag-slm-knowledge-moat",
     "date": "2026.04.23",
