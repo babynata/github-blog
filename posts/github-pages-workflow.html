@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="一个适合 GitHub Pages 的轻量博客工作流。">
+  <meta name="theme-color" content="#dce6da">
+  <title>GitHub Pages 的轻量工作流 | 青苔手记</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../script.js" defer></script>
+</head>
+<body class="article-page">
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-copy">
+          <strong>青苔手记</strong>
+          <span>minimal notes for calm building</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="文章导航">
+        <a href="../index.html#posts">文章</a>
+        <a href="../index.html#about">关于</a>
+        <a href="../admin/index.html">内容台</a>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article-shell reveal">
+        <p class="eyebrow">GitHub / 部署</p>
+        <h1>GitHub Pages 的轻量工作流</h1>
+        <div class="article-meta">
+          <span>2026.04.18</span><span>1 min</span><span>GitHub</span><span>部署</span>
+        </div>
+
+        <div class="article-content">
+          <p>如果博客的维护成本太高，它往往会在第三篇文章之后被搁置。相比一开始就引入完整框架，我更偏爱先用最简单的静态结构跑起来。文章能发、样式稳定、目录清楚，这三件事已经足够。</p>
+<h2>最小可用结构</h2>
+<p>一个首页、一个样式文件、一个脚本文件，再加上独立的文章页面，其实就能组成一套清爽的博客。对 GitHub Pages 来说，这种结构还特别友好，因为不需要额外构建。</p>
+<pre><code class="language-text">github-blog/
+├── content/
+│   └── posts/
+├── data/
+├── posts/
+└── scripts/</code></pre>
+<h2>维护时只做两件事</h2>
+<ul><li>在 <code>content/posts/</code> 里新建一篇 Markdown 文章。</li><li>运行 <code>node scripts/build-posts.mjs</code> 自动生成文章页和列表数据。</li></ul>
+<p>这样做的好处是，你不会被构建链和配置文件分散注意力。你处理的永远是非常具体的内容：标题写什么、摘要怎么写、正文顺序要不要改。</p>
+<blockquote>对个人博客来说，最好的工作流往往不是最强大的，而是最不容易中断的。</blockquote>
+<p>等你以后真的需要 RSS、标签页、全文检索，再往上加一层工具也不迟。先把写作这件事变轻，通常比一步到位更现实。</p>
+        </div>
+
+        <div class="article-end">
+          <a class="back-link" href="../index.html#posts">返回文章列表</a>
+          <span>这个模板已经适配好 GitHub Pages 的基础场景。</span>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <span>© <span data-year></span> 青苔手记</span>
+      <span>为 GitHub Pages 设计</span>
+    </footer>
+  </div>
+</body>
+</html>

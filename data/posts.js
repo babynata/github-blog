@@ -1,5 +1,28 @@
 window.BLOG_POSTS = [
   {
+    "title": "我越来越觉得，AI真正的能力放大器是反馈闭环",
+    "slug": "ai-feedback-loop-capability-amplifier",
+    "date": "2026.04.28",
+    "rawDate": "2026-04-28",
+    "updatedAt": "2026.04.28",
+    "readTime": "8 min",
+    "tags": [
+      "AI",
+      "Agent",
+      "产品",
+      "洞察"
+    ],
+    "status": "published",
+    "category": "AI / 产品",
+    "summary": "我越来越相信，现阶段 AI 系统真正拉开差距的，不是一次生成更准，而是能不能把生成、反馈和修正做成闭环。",
+    "description": "从 ReAct、蒸馏、Self-Refine 到面试复盘和产品迭代，我越来越觉得，现阶段 AI 产品最值得抓住的，不是表面的“循环”，而是生成、反馈、修正组成的闭环能力。",
+    "href": "posts/ai-feedback-loop-capability-amplifier.html",
+    "generatedPath": "posts/ai-feedback-loop-capability-amplifier.html",
+    "sourcePath": "content/posts/ai-feedback-loop-capability-amplifier.md",
+    "sourceHref": "content/posts/ai-feedback-loop-capability-amplifier.md",
+    "note": "草稿：这篇已经适合博客发布，但还可以继续压缩段落，做得更像个人长期写作专栏。"
+  },
+  {
     "title": "垂直领域的AI护城河：为什么RAG基础设施和小模型研发是两个确定的浪潮",
     "slug": "vertical-ai-rag-slm-knowledge-moat",
     "date": "2026.04.23",
