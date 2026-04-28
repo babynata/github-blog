@@ -262,7 +262,6 @@ function buildPostPage(post) {
       <nav class="site-nav" aria-label="文章导航">
         <a href="../index.html#posts">文章</a>
         <a href="../index.html#about">关于</a>
-        <a href="../admin/index.html">内容台</a>
       </nav>
     </header>
 
@@ -287,7 +286,7 @@ function buildPostPage(post) {
 
     <footer class="site-footer">
       <span>© <span data-year></span> ${siteName}</span>
-      <span>为 GitHub Pages 设计</span>
+      <span>个人写作，持续更新</span>
     </footer>
   </div>
 </body>

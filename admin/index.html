@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="青苔手记的文章管理台：查看文章状态、源文件与发布路径。">
+  <meta name="description" content="青苔手记的文章管理台：查看个人文章状态、源文件与发布路径。">
   <meta name="theme-color" content="#dce6da">
   <title>内容台 | 青苔手记</title>
   <link rel="stylesheet" href="../styles.css">
@@ -32,10 +32,10 @@
       <section class="hero reveal">
         <div class="hero-copy">
           <p class="eyebrow">Content Desk</p>
-          <h1>把文章管理也做得安静一点。</h1>
+          <h1>管理自己的文章，而不是展示测试内容。</h1>
           <p class="hero-text">
-            这里是第一阶段的内容管理台：文章以 Markdown 保存，构建脚本会自动生成公开页面与首页列表。
-            你可以在这里查看状态、标签、源文件路径和发布结果。
+            这里保留的是个人文章的整理视图。每篇文章以 Markdown 保存，
+            构建脚本会自动生成公开页面与首页列表，你可以在这里检查状态、标签和发布结果。
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="../content/posts/_template.md">查看文章模板</a>
@@ -47,10 +47,10 @@
           <section class="panel-card">
             <div class="panel-copy">
               <p class="eyebrow">Workflow</p>
-              <h2>写 Markdown，再生成站点。</h2>
+              <h2>写完，再决定要不要公开。</h2>
               <p>
-                这个版本没有引入数据库或在线后台，管理成本更低，也更适合 GitHub Pages。
-                发文流程会保持在 4 步以内。
+                所有示例文章都可以清掉，真正保留的只会是你确认要发布的个人内容。
+                这里更像一个轻量整理台，而不是面向访客展示的页面。
               </p>
             </div>
             <div class="stats" aria-label="内容统计">
@@ -69,8 +69,8 @@
             </div>
             <div class="meta-strip">
               <span>内容源：`content/posts/*.md`</span>
-              <span>生成页：`posts/*.html`</span>
-              <span>列表数据：`data/posts.js`</span>
+              <span>公开页：`posts/*.html`</span>
+              <span>索引：`data/posts.js`</span>
             </div>
           </section>
         </div>
@@ -110,7 +110,7 @@
 
         <aside class="glass-card admin-side-card">
           <p class="eyebrow">Publish Steps</p>
-          <h2>每次发文怎么做</h2>
+          <h2>发文前的最短路径</h2>
           <ol class="workflow-list">
             <li>复制 `content/posts/_template.md` 新建文章。</li>
             <li>填写标题、slug、日期、摘要、标签和正文。</li>
@@ -123,7 +123,7 @@
           </div>
 
           <p class="section-copy">
-            你也可以用 `npm run build:posts`。当前版本里，`draft` 状态不会出现在首页，也不会生成公开文章页。
+            你也可以用 `npm run build:posts`。`draft` 状态不会出现在首页，也不会生成公开文章页。
           </p>
         </aside>
       </section>
@@ -131,7 +131,7 @@
 
     <footer class="site-footer">
       <span>© <span data-year></span> 青苔手记</span>
-      <span>内容台：Markdown 驱动</span>
+      <span>内容台：仅用于整理个人写作</span>
     </footer>
   </div>
 </body>
