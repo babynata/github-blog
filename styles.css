@@ -151,6 +151,10 @@ main {
   grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.85fr);
 }
 
+.writing-focus-section {
+  grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+}
+
 .hero-copy,
 .panel-card,
 .glass-card,
@@ -186,6 +190,10 @@ main {
 .hero-copy {
   padding: clamp(32px, 5vw, 56px);
   background: linear-gradient(180deg, rgba(252, 253, 251, 0.94), rgba(242, 247, 240, 0.86));
+}
+
+.writing-focus-section .hero-copy {
+  padding: clamp(28px, 4vw, 40px);
 }
 
 .hero-panel {
@@ -254,6 +262,11 @@ p {
 
 .hero-copy h1 {
   max-width: 10ch;
+}
+
+.writing-focus-section .hero-copy h1 {
+  max-width: 13ch;
+  font-size: clamp(2.1rem, 4.8vw, 3.25rem);
 }
 
 .hero-actions {
@@ -337,6 +350,37 @@ p {
   grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
 }
 
+.about-section {
+  display: grid;
+}
+
+.about-card {
+  max-width: 720px;
+  padding: clamp(22px, 3vw, 30px);
+}
+
+.about-merged {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  gap: 24px;
+}
+
+.about-lead-card,
+.about-focus-card {
+  display: grid;
+  align-content: start;
+  gap: 20px;
+}
+
+.about-lead-card {
+  padding: clamp(28px, 4vw, 40px);
+}
+
+.about-focus-card {
+  padding: clamp(24px, 3.6vw, 34px);
+  background: linear-gradient(180deg, rgba(252, 253, 251, 0.94), rgba(240, 246, 238, 0.88));
+}
+
 .feature-list {
   list-style: none;
   padding: 0;
@@ -359,7 +403,8 @@ p {
   gap: 18px;
 }
 
-.now-card blockquote {
+.now-card blockquote,
+.focus-quote {
   margin: 0;
   padding: 18px;
   border-radius: var(--radius-md);
@@ -404,6 +449,23 @@ p {
   gap: 0.75rem;
 }
 
+.posts-section-primary {
+  display: grid;
+  gap: 22px;
+}
+
+.posts-section-primary .section-heading {
+  margin-bottom: 0;
+}
+
+.posts-section-primary h2 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+}
+
+.notes-section-secondary h2 {
+  font-size: clamp(1.85rem, 3.6vw, 2.8rem);
+}
+
 .tag-filter {
   padding: 0.66rem 1rem;
   border: 1px solid var(--line);
@@ -435,6 +497,11 @@ p {
   gap: 18px;
 }
 
+.post-grid-primary {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
 .post-card,
 .note-card {
   padding: 24px;
@@ -452,6 +519,34 @@ p {
     border-color 260ms ease,
     background-color 260ms ease,
     opacity 420ms ease;
+}
+
+.post-grid-primary .post-card.is-featured {
+  min-height: 360px;
+  padding: 30px;
+  background:
+    radial-gradient(circle at top right, rgba(170, 190, 168, 0.22), transparent 34%),
+    linear-gradient(180deg, rgba(252, 253, 251, 0.98), rgba(239, 245, 237, 0.92));
+  border-color: rgba(75, 98, 80, 0.22);
+  box-shadow: 0 28px 72px rgba(54, 74, 59, 0.12);
+}
+
+.post-grid-primary .post-card.is-featured h3 {
+  font-size: 1.85rem;
+  max-width: 15ch;
+}
+
+.post-grid-primary .post-card.is-featured p {
+  font-size: 1rem;
+}
+
+.post-grid-primary .post-card.is-featured .post-top {
+  font-size: 0.92rem;
+}
+
+.post-grid-primary .post-card.is-featured .post-footer {
+  padding-top: 12px;
+  border-top: 1px solid rgba(88, 110, 90, 0.12);
 }
 
 .post-card.is-visible {
@@ -799,8 +894,10 @@ main > .reveal:nth-child(4) {
 @media (max-width: 980px) {
   .hero,
   .intro-grid,
+  .about-merged,
   .admin-layout,
   .post-grid,
+  .post-grid-primary,
   .note-grid {
     grid-template-columns: 1fr;
   }

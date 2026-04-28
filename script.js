@@ -59,13 +59,14 @@ function renderPosts(container, totalNode, activeTag) {
   }
 
   container.innerHTML = filteredPosts
-    .map((post) => {
+    .map((post, index) => {
+      const featuredClass = index === 0 ? "post-card is-featured" : "post-card";
       const tags = post.tags
         .map((tag) => `<span class="post-tag">${escapeHtml(tag)}</span>`)
         .join("");
 
       return `
-        <a class="post-card" href="${post.href}">
+        <a class="${featuredClass}" href="${post.href}">
           <div class="post-top">
             <span>${escapeHtml(post.date)}</span>
             <span>${escapeHtml(post.readTime)}</span>
