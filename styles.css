@@ -462,8 +462,160 @@ p {
   font-size: clamp(2.4rem, 5vw, 4rem);
 }
 
+.fragments-section h2,
 .notes-section-secondary h2 {
   font-size: clamp(1.85rem, 3.6vw, 2.8rem);
+}
+
+.fragments-section {
+  display: grid;
+  gap: 18px;
+}
+
+.fragments-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+.fragments-grid.has-single {
+  grid-template-columns: minmax(0, 560px);
+}
+
+.fragment-card {
+  display: grid;
+  gap: 14px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(252, 253, 251, 0.98), rgba(244, 248, 242, 0.92));
+  box-shadow: 0 22px 42px rgba(54, 74, 59, 0.09);
+  align-self: start;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.fragment-card:hover,
+.fragment-card:focus-within {
+  transform: translateY(-3px);
+  box-shadow: 0 26px 52px rgba(54, 74, 59, 0.13);
+  border-color: rgba(75, 98, 80, 0.26);
+}
+
+.fragment-card p,
+.fragment-card blockquote {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+.fragment-card h3 {
+  font-size: 1.6rem;
+}
+
+.fragment-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+.fragment-list li + li {
+  margin-top: 0.35rem;
+}
+
+.fragment-type {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.42rem 0.72rem;
+  border-radius: 999px;
+  background: rgba(215, 226, 213, 0.6);
+  border: 1px solid rgba(88, 110, 90, 0.12);
+  color: var(--accent-deep);
+  font-size: 0.8rem;
+}
+
+.fragment-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.fragment-date {
+  color: var(--muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+}
+
+.fragment-card-short {
+  align-content: start;
+  padding: 20px 22px;
+}
+
+.fragment-card-long {
+  align-content: start;
+  grid-column: span 2;
+  padding: 28px 30px;
+  background:
+    radial-gradient(circle at top right, rgba(170, 190, 168, 0.18), transparent 34%),
+    linear-gradient(180deg, rgba(252, 253, 251, 0.98), rgba(239, 245, 237, 0.92));
+}
+
+.fragment-card-medium {
+  align-content: start;
+}
+
+.fragment-card-quote {
+  grid-column: 1 / span 3;
+  padding: 22px 26px;
+  background: rgba(244, 248, 242, 0.9);
+}
+
+.fragment-card-quote blockquote {
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  line-height: 1.55;
+}
+
+.fragment-angle-1 {
+  transform: rotate(-0.45deg);
+}
+
+.fragment-angle-2 {
+  transform: rotate(0.3deg);
+}
+
+.fragment-angle-3 {
+  transform: rotate(-0.18deg);
+}
+
+.fragment-card:hover.fragment-angle-1,
+.fragment-card:hover.fragment-angle-2,
+.fragment-card:hover.fragment-angle-3,
+.fragment-card:focus-within.fragment-angle-1,
+.fragment-card:focus-within.fragment-angle-2,
+.fragment-card:focus-within.fragment-angle-3 {
+  transform: translateY(-3px) rotate(0deg);
+}
+
+.fragments-grid.has-single .fragment-card-long,
+.fragments-grid.has-single .fragment-card-medium,
+.fragments-grid.has-single .fragment-card-short,
+.fragments-grid.has-single .fragment-card-quote {
+  min-height: auto;
+}
+
+.fragments-grid.has-single .fragment-card {
+  transform: none;
+}
+
+.fragments-grid.has-single .fragment-card-long {
+  grid-column: auto;
+  max-width: 100%;
 }
 
 .tag-filter {
@@ -898,8 +1050,17 @@ main > .reveal:nth-child(4) {
   .admin-layout,
   .post-grid,
   .post-grid-primary,
+  .fragments-grid,
   .note-grid {
     grid-template-columns: 1fr;
+  }
+
+  .fragment-card-quote {
+    grid-column: auto;
+  }
+
+  .fragment-card-long {
+    grid-column: auto;
   }
 
   .section-heading,

@@ -8,6 +8,7 @@
   <title>青苔手记</title>
   <link rel="stylesheet" href="styles.css">
   <script src="data/posts.js" defer></script>
+  <script src="data/fragments.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body class="page-home">
@@ -42,7 +43,17 @@
         <div id="post-list" class="post-grid post-grid-primary" aria-live="polite"></div>
       </section>
 
-      <section id="notes" class="notes-section notes-section-secondary reveal">
+      <section id="notes" class="fragments-section reveal">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Thought Fragments</p>
+            <h2>还没长成文章的思考碎片</h2>
+          </div>
+        </div>
+        <div id="fragment-list" class="fragments-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="notes-guide" class="notes-section notes-section-secondary reveal">
         <div class="section-heading">
           <div>
             <p class="eyebrow">Writing Notes</p>

@@ -65,9 +65,3 @@ status: published
 11. ICONIQ Capital，"The Builder's Playbook 2025 Annual Report"（近80%顶尖AI构建者投资于代理工作流和垂直领域应用）
 12. GM Insights，"Vertical AI Market Size & Share Report"，2024年12月（2024年垂直AI市场102亿美元，预计2034年达696亿美元，CAGR 21.6%）
 13. 通信世界网，"2025巴展观察：AI终端与应用的'由虚向实'跃迁"，2025年3月（垂类应用市场预计从2024年51亿美元增至2032年千亿美元级别）
-
-> 也支持 blockquote。
-
-```js
-console.log("hello, blog");
-```

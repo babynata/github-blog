@@ -1,5 +1,6 @@
 const allPosts = Array.isArray(window.BLOG_POSTS) ? window.BLOG_POSTS : [];
 const posts = allPosts.filter((post) => post.status === "published");
+const fragments = Array.isArray(window.BLOG_FRAGMENTS) ? window.BLOG_FRAGMENTS : [];
 
 function escapeHtml(value) {
   return String(value)
@@ -21,6 +22,65 @@ function updateSiteStats() {
   document.querySelectorAll("[data-tag-count]").forEach((node) => {
     node.textContent = String(new Set(posts.flatMap((post) => post.tags)).size).padStart(2, "0");
   });
+}
+
+function renderFragmentBody(fragment) {
+  if (Array.isArray(fragment.orderedItems) && fragment.orderedItems.length) {
+    const items = fragment.orderedItems
+      .map((item) => `<li>${escapeHtml(item)}</li>`)
+      .join("");
+
+    return `<ol class="fragment-list">${items}</ol>`;
+  }
+
+  if (Array.isArray(fragment.paragraphs) && fragment.paragraphs.length) {
+    return fragment.paragraphs
+      .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
+      .join("");
+  }
+
+  if (fragment.quote) {
+    return `<blockquote>${escapeHtml(fragment.quote)}</blockquote>`;
+  }
+
+  return `<p>${escapeHtml(fragment.body || "")}</p>`;
+}
+
+function renderFragments(container) {
+  if (!container) {
+    return;
+  }
+
+  if (!fragments.length) {
+    container.innerHTML = '<div class="empty-state">这里还没有公开的思考碎片。</div>';
+    return;
+  }
+
+  const gridStateClass = fragments.length === 1 ? "has-single" : "has-multiple";
+  container.classList.remove("has-single", "has-multiple");
+  container.classList.add(gridStateClass);
+
+  container.innerHTML = fragments
+    .map((fragment, index) => {
+      const kind = fragment.kind || "short";
+      const angleClass = `fragment-angle-${(index % 3) + 1}`;
+      const kindClass = `fragment-card fragment-card-${kind} ${angleClass}`;
+      const title = fragment.title ? `<h3>${escapeHtml(fragment.title)}</h3>` : "";
+      const label = fragment.label ? `<span class="fragment-type">${escapeHtml(fragment.label)}</span>` : "";
+      const meta = fragment.date ? `<span class="fragment-date">${escapeHtml(fragment.date)}</span>` : "";
+
+      return `
+        <article class="${kindClass}">
+          <div class="fragment-meta">
+            ${label}
+            ${meta}
+          </div>
+          ${title}
+          ${renderFragmentBody(fragment)}
+        </article>
+      `;
+    })
+    .join("");
 }
 
 function renderFilters(container, activeTag, onSelect) {
@@ -103,6 +163,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterContainer = document.querySelector("#tag-filters");
   const postContainer = document.querySelector("#post-list");
   const totalNode = document.querySelector("#post-total");
+  const fragmentContainer = document.querySelector("#fragment-list");
+
+  renderFragments(fragmentContainer);
 
   if (!filterContainer || !postContainer) {
     return;
