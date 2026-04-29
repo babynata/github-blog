@@ -282,10 +282,28 @@ function buildPostPage(post) {
           <span>${escapeHtml(footerNote)}</span>
         </div>
       </article>
+
+      <section class="article-comments-section reveal">
+        <article class="glass-card comments-card">
+          <p class="eyebrow">Comments</p>
+          <h2>评论</h2>
+          <p class="section-copy">
+            欢迎留下你的想法、问题或不同判断。每篇文章都有自己独立的评论区。
+          </p>
+          <div
+            id="article-comments"
+            class="comments-shell"
+            data-comments-term="${escapeHtml(post.slug)}"
+            data-comments-title="${escapeHtml(post.title)}"
+            aria-live="polite"
+          ></div>
+        </article>
+      </section>
     </main>
 
     <footer class="site-footer">
       <span>© <span data-year></span> ${siteName}</span>
+      <span class="visitor-counter">访问计数 <strong data-visitor-count>加载中</strong></span>
       <span>个人写作，持续更新</span>
     </footer>
   </div>

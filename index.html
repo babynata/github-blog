@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="styles.css">
   <script src="data/posts.js" defer></script>
   <script src="data/fragments.js" defer></script>
+  <script src="data/knowledge.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body class="page-home">
@@ -23,6 +24,7 @@
       </a>
       <nav class="site-nav" aria-label="主导航">
         <a href="#posts">文章</a>
+        <a href="#knowledge">知识点</a>
         <a href="#about">关于</a>
         <a href="#notes">碎片</a>
       </nav>
@@ -53,6 +55,17 @@
         <div id="fragment-list" class="fragments-grid" aria-live="polite"></div>
       </section>
 
+      <section id="knowledge" class="knowledge-section reveal">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Product Knowledge</p>
+            <h2>值得反复回看的产品知识点</h2>
+          </div>
+          <span id="knowledge-total" class="section-meta"></span>
+        </div>
+        <div id="knowledge-list" class="knowledge-grid" aria-live="polite"></div>
+      </section>
+
       <section id="notes-guide" class="notes-section notes-section-secondary reveal">
         <div class="section-heading">
           <div>
@@ -79,60 +92,51 @@
         </div>
       </section>
 
-      <section id="about" class="about-merged reveal">
+      <section id="about" class="about-merged about-single reveal">
         <article class="glass-card about-lead-card">
           <p class="eyebrow">About This Blog</p>
-          <h2>把判断、写作和长期积累放在同一个安静的地方。</h2>
+          <h2>把转型、产品想法和长期积累放在同一个安静的地方。</h2>
           <p class="section-copy">
-            这个站点记录我持续写下来的内容，主要围绕 AI、产品、写作和长期学习。
-            页面刻意减少了视觉噪声，把注意力留给标题、摘要和正文，让文章本身比页面更先被看见。
+            这个站点记录我从 Java 后端转向 AI PM 过程里的学习、观察和写作。
+            页面刻意减少了视觉噪声，把注意力留给标题、摘要和正文，让内容本身比页面更先被看见。
           </p>
           <p class="section-copy">
-            比起追求页面上的热闹，我更关心一篇文章能不能在几周后、几个月后依然值得回头再读。
-            所以这里不会堆测试内容，只保留那些我愿意长期保存、持续修订的表达。
+            这里会放一些关于产品的想法和碎碎念，也会留下我在学习 AI、理解产品、复盘问题时写下来的判断。
+            比起追求页面上的热闹，我更希望这里能成为一个持续学习、持续思考、持续复盘、持续总结的地方。
           </p>
           <ul class="feature-list">
-            <li>只保留已经确认要公开的个人文章</li>
-            <li>主题集中在 AI、产品判断与长期写作</li>
-            <li>标签和文章列表会跟随已发布内容自动更新</li>
-            <li>页面保持克制，方便长期扩写和持续整理</li>
+            <li>Java 后端转 AI PM 的过程记录</li>
+            <li>一些关于产品的想法和碎碎念</li>
+            <li>持续学习、持续思考、持续复盘、持续总结</li>
           </ul>
         </article>
+      </section>
 
-        <aside class="glass-card about-focus-card">
-          <blockquote class="focus-quote">
-            “写下来，不只是为了表达，而是为了把判断沉淀成以后还能复用的东西。”
-          </blockquote>
-          <div class="mini-stack">
-            <span class="pill">AI 洞察</span>
-            <span class="pill">产品判断</span>
-            <span class="pill">长期写作</span>
+      <section id="guestbook" class="guestbook-section reveal">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Guestbook</p>
+            <h2>留言</h2>
           </div>
-          <div class="stats" aria-label="博客信息">
-            <div class="stat">
-              <strong data-post-count>00</strong>
-              <span>公开文章</span>
-            </div>
-            <div class="stat">
-              <strong>AI</strong>
-              <span>核心主题</span>
-            </div>
-            <div class="stat">
-              <strong data-tag-count>00</strong>
-              <span>写作标签</span>
-            </div>
-          </div>
-          <div class="meta-strip">
-            <span>主题：AI / 产品 / 写作</span>
-            <span>风格：极简 / 低饱和绿色</span>
-            <span>状态：持续更新</span>
-          </div>
-        </aside>
+        </div>
+        <article class="glass-card comments-card">
+          <p class="section-copy">
+            如果你也在做转型、关注 AI 产品，或者只是想留下一句想法，欢迎在这里留言。
+          </p>
+          <div
+            id="guestbook-comments"
+            class="comments-shell"
+            data-comments-term="guestbook"
+            data-comments-title="Guestbook"
+            aria-live="polite"
+          ></div>
+        </article>
       </section>
     </main>
 
     <footer class="site-footer">
       <span>© <span data-year></span> 青苔手记</span>
+      <span class="visitor-counter">访问计数 <strong data-visitor-count>加载中</strong></span>
       <span>个人写作，持续更新</span>
     </footer>
   </div>
