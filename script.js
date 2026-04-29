@@ -41,6 +41,27 @@ function setVisitorCountLabel(value) {
   });
 }
 
+function normalizeCounterNumber(result) {
+  const candidates = [
+    result?.value,
+    result?.count,
+    result?.data?.value,
+    result?.data?.count
+  ];
+
+  for (const candidate of candidates) {
+    if (typeof candidate === "number" && Number.isFinite(candidate)) {
+      return candidate;
+    }
+
+    if (typeof candidate === "string" && candidate.trim() && !Number.isNaN(Number(candidate))) {
+      return Number(candidate);
+    }
+  }
+
+  return null;
+}
+
 function shouldIncrementVisitorCount() {
   try {
     const lastCountedAt = Number(window.localStorage.getItem(VISITOR_STORAGE_KEY) || 0);
@@ -105,9 +126,8 @@ async function hydrateVisitorCount() {
       }
     }
 
-    const formatted = typeof result.value === "number"
-      ? result.value.toLocaleString("zh-CN")
-      : "—";
+    const count = normalizeCounterNumber(result);
+    const formatted = count !== null ? count.toLocaleString("zh-CN") : "—";
 
     setVisitorCountLabel(formatted);
   } catch {
@@ -144,13 +164,7 @@ function mountGiscus(container) {
   script.setAttribute("data-lang", "zh-CN");
   script.setAttribute("data-loading", "lazy");
 
-  container.innerHTML = `
-    <p class="comments-note">
-      使用 GitHub 账号留言。如果评论框没有出现，请确认仓库已经安装
-      <a href="https://github.com/apps/giscus" target="_blank" rel="noreferrer">giscus GitHub App</a>。
-    </p>
-    <div class="giscus"></div>
-  `;
+  container.innerHTML = '<div class="giscus"></div>';
 
   container.dataset.commentsMounted = "true";
   container.appendChild(script);
@@ -371,9 +385,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const fragmentContainer = document.querySelector("#fragment-list");
   const knowledgeContainer = document.querySelector("#knowledge-list");
   const knowledgeTotalNode = document.querySelector("#knowledge-total");
+  const hasCommentTargets = document.querySelector("[data-comments-term]");
 
   renderFragments(fragmentContainer);
   renderKnowledgePoints(knowledgeContainer, knowledgeTotalNode);
+  if (hasCommentTargets) {
+    mountComments();
+  }
 
   if (!filterContainer || !postContainer) {
     return;
@@ -390,5 +408,4 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   update();
-  mountComments();
 });

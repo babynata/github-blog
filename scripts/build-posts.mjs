@@ -8,7 +8,7 @@ const contentDir = path.join(rootDir, "content", "posts");
 const postsDir = path.join(rootDir, "posts");
 const dataDir = path.join(rootDir, "data");
 const siteName = "青苔手记";
-const assetVersion = "20260429-1";
+const assetVersion = "20260429-2";
 
 function escapeHtml(value) {
   return String(value)
