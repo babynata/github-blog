@@ -8,6 +8,7 @@ const contentDir = path.join(rootDir, "content", "posts");
 const postsDir = path.join(rootDir, "posts");
 const dataDir = path.join(rootDir, "data");
 const siteName = "青苔手记";
+const assetVersion = "20260429-1";
 
 function escapeHtml(value) {
   return String(value)
@@ -246,8 +247,8 @@ function buildPostPage(post) {
   <meta name="description" content="${escapeHtml(post.description)}">
   <meta name="theme-color" content="#dce6da">
   <title>${escapeHtml(post.title)} | ${siteName}</title>
-  <link rel="stylesheet" href="../styles.css">
-  <script src="../script.js" defer></script>
+  <link rel="stylesheet" href="../styles.css?v=${assetVersion}">
+  <script src="../script.js?v=${assetVersion}" defer></script>
 </head>
 <body class="article-page">
   <div class="page-shell">

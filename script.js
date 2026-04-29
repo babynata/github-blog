@@ -149,6 +149,7 @@ function mountGiscus(container) {
       使用 GitHub 账号留言。如果评论框没有出现，请确认仓库已经安装
       <a href="https://github.com/apps/giscus" target="_blank" rel="noreferrer">giscus GitHub App</a>。
     </p>
+    <div class="giscus"></div>
   `;
 
   container.dataset.commentsMounted = "true";
@@ -363,7 +364,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateSiteStats();
   hydrateVisitorCount();
-  mountComments();
 
   const filterContainer = document.querySelector("#tag-filters");
   const postContainer = document.querySelector("#post-list");
@@ -390,4 +390,5 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   update();
+  mountComments();
 });
