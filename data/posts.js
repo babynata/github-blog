@@ -1,5 +1,29 @@
 window.BLOG_POSTS = [
   {
+    "title": "如果把 Adiantum 当成一个 Agent，我会从哪里判断它的核心竞争力",
+    "slug": "adiantum-agent-core-competitiveness",
+    "date": "2026.04.29",
+    "rawDate": "2026-04-29",
+    "updatedAt": "2026.04.29",
+    "readTime": "8 min",
+    "tags": [
+      "AI",
+      "Agent",
+      "产品",
+      "Harness",
+      "系统设计"
+    ],
+    "status": "published",
+    "category": "AI / 产品",
+    "summary": "如果把 Adiantum 看成一个 Agent，我更看重的不是它用了哪个模型，而是它能否把模型、harness、工具与监督机制组织成稳定可控的执行系统。",
+    "description": "这篇文章讨论如果把 Adiantum 当成一个 Agent，应当怎样判断它的核心竞争力，以及为什么真正值得看的不是模型单点，而是 harness、工具、环境和人类监督共同构成的系统能力。",
+    "href": "posts/adiantum-agent-core-competitiveness.html",
+    "generatedPath": "posts/adiantum-agent-core-competitiveness.html",
+    "sourcePath": "content/posts/adiantum-agent-core-competitiveness.md",
+    "sourceHref": "content/posts/adiantum-agent-core-competitiveness.md",
+    "note": "这是我基于公开资料和 Agent 工程实践做的一次阶段性判断。"
+  },
+  {
     "title": "AI 真正的能力放大器，不是生成，而是反馈闭环",
     "slug": "ai-feedback-loop-capability-amplifier",
     "date": "2026.04.28",
