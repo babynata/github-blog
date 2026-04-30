@@ -6,8 +6,8 @@
   <meta name="description" content="从 ReAct、蒸馏、Self-Refine 到面试复盘和产品迭代，这篇文章讨论为什么现阶段 AI 产品最值得抓住的，不是表面的“循环”，而是生成、反馈、修正组成的闭环能力。">
   <meta name="theme-color" content="#dce6da">
   <title>AI 真正的能力放大器，不是生成，而是反馈闭环 | 青苔手记</title>
-  <link rel="stylesheet" href="../styles.css?v=20260429-2">
-  <script src="../script.js?v=20260429-2" defer></script>
+  <link rel="stylesheet" href="../styles.css?v=20260430-1">
+  <script src="../script.js?v=20260430-1" defer></script>
 </head>
 <body class="article-page">
   <div class="page-shell">
@@ -72,14 +72,7 @@
 <p>这也是为什么我会觉得，AI 给我最大的启发，可能不是它会替我完成多少事，而是它逼着我重新理解一件更底层的事：<strong>真正的成长，往往不是来自更久的准备，而是来自更快地进入真实世界，再把真实反馈变成下一轮行动的输入。</strong></p>
 <p>无论是模型、产品，还是人，很多时候都不是靠“一步到位”变强的，而是靠“走一轮、看结果、再修正”一点点逼近上限的。</p>
 <h2>参考来源</h2>
-<p>1. <a href="https://www.anthropic.com/engineering/building-effective-agents">Anthropic《Building effective agents》</a> 发布日期：2024-12-19 支撑论点：agent 的价值来自环境反馈、迭代和校验；不是所有任务都需要复杂闭环。</p>
-<p>2. <a href="https://openai.com/index/api-model-distillation/">OpenAI《Model Distillation in the API》</a> 发布日期：2024-10-01 支撑论点：蒸馏是把大模型输出转成下一轮优化信号，而且工程上本身就是迭代流程。</p>
-<p>3. <a href="https://developers.openai.com/api/docs/guides/supervised-fine-tuning#distilling-from-a-larger-model">OpenAI Supervised Fine-Tuning / Distillation 文档</a> 访问日期：2026-04-28 支撑论点：先捕获大模型响应，再生成数据集，再微调小模型，并持续评估迭代。</p>
-<p>4. <a href="https://arxiv.org/pdf/2210.03629">ReAct 论文</a> 支撑论点：reasoning 与 acting 交错，让模型根据外部信息持续调整计划。</p>
-<p>5. <a href="https://arxiv.org/pdf/2303.17651">SELF-REFINE 论文</a> 支撑论点：初稿-反馈-改写的测试时迭代可以显著提升输出质量。</p>
-<p>6. <a href="https://arxiv.org/pdf/2303.11366">Reflexion 论文</a> 支撑论点：把环境反馈转成文字化反思，再带到下一轮，会比单纯重试更有效。</p>
-<p>7. <a href="https://arxiv.org/pdf/1706.03762">Attention Is All You Need</a> 支撑论点：decoder 更准确地说是自回归生成机制，不宜直接等同于本文强调的反馈闭环。</p>
-<p>8. <a href="https://arxiv.org/pdf/1503.02531">Distilling the Knowledge in a Neural Network</a> 支撑论点：蒸馏的核心是用 teacher 的 soft targets 训练 student，而不是简单重复生成。</p>
+<ol><li><a href="https://www.anthropic.com/engineering/building-effective-agents">Anthropic《Building effective agents》</a><br>发布日期：2024-12-19<br>支撑论点：agent 的价值来自环境反馈、迭代和校验；不是所有任务都需要复杂闭环。</li><li><a href="https://openai.com/index/api-model-distillation/">OpenAI《Model Distillation in the API》</a><br>发布日期：2024-10-01<br>支撑论点：蒸馏是把大模型输出转成下一轮优化信号，而且工程上本身就是迭代流程。</li><li><a href="https://developers.openai.com/api/docs/guides/supervised-fine-tuning#distilling-from-a-larger-model">OpenAI Supervised Fine-Tuning / Distillation 文档</a><br>访问日期：2026-04-28<br>支撑论点：先捕获大模型响应，再生成数据集，再微调小模型，并持续评估迭代。</li><li><a href="https://arxiv.org/pdf/2210.03629">ReAct 论文</a><br>支撑论点：reasoning 与 acting 交错，让模型根据外部信息持续调整计划。</li><li><a href="https://arxiv.org/pdf/2303.17651">SELF-REFINE 论文</a><br>支撑论点：初稿-反馈-改写的测试时迭代可以显著提升输出质量。</li><li><a href="https://arxiv.org/pdf/2303.11366">Reflexion 论文</a><br>支撑论点：把环境反馈转成文字化反思，再带到下一轮，会比单纯重试更有效。</li><li><a href="https://arxiv.org/pdf/1706.03762">Attention Is All You Need</a><br>支撑论点：decoder 更准确地说是自回归生成机制，不宜直接等同于本文强调的反馈闭环。</li><li><a href="https://arxiv.org/pdf/1503.02531">Distilling the Knowledge in a Neural Network</a><br>支撑论点：蒸馏的核心是用 teacher 的 soft targets 训练 student，而不是简单重复生成。</li></ol>
         </div>
 
         <div class="article-end">

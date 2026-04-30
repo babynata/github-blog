@@ -8,7 +8,7 @@ const contentDir = path.join(rootDir, "content", "posts");
 const postsDir = path.join(rootDir, "posts");
 const dataDir = path.join(rootDir, "data");
 const siteName = "青苔手记";
-const assetVersion = "20260429-2";
+const assetVersion = "20260430-1";
 
 function escapeHtml(value) {
   return String(value)
@@ -116,9 +116,30 @@ function renderMarkdown(markdown) {
   const lines = markdown.replace(/\r\n/g, "\n").split("\n");
   const html = [];
   let paragraph = [];
-  let list = [];
+  let list = {
+    type: null,
+    items: [],
+    pendingBreak: false
+  };
+  let table = [];
   let quote = [];
   let codeFence = null;
+
+  function splitTableRow(line) {
+    return line
+      .trim()
+      .replace(/^\||\|$/g, "")
+      .split("|")
+      .map((cell) => cell.trim());
+  }
+
+  function isTableRow(line) {
+    return /^\|.*\|$/.test(line.trim());
+  }
+
+  function isTableSeparator(line) {
+    return splitTableRow(line).every((cell) => /^:?-{3,}:?$/.test(cell));
+  }
 
   function flushParagraph() {
     if (!paragraph.length) {
@@ -130,12 +151,41 @@ function renderMarkdown(markdown) {
   }
 
   function flushList() {
-    if (!list.length) {
+    if (!list.items.length || !list.type) {
       return;
     }
 
-    html.push(`<ul>${list.map((item) => `<li>${renderInline(item)}</li>`).join("")}</ul>`);
-    list = [];
+    const tag = list.type === "ordered" ? "ol" : "ul";
+    html.push(
+      `<${tag}>${list.items.map((itemLines) => {
+        return `<li>${itemLines.map((itemLine) => renderInline(itemLine)).join("<br>")}</li>`;
+      }).join("")}</${tag}>`
+    );
+    list = {
+      type: null,
+      items: [],
+      pendingBreak: false
+    };
+  }
+
+  function flushTable() {
+    if (!table.length) {
+      return;
+    }
+
+    const rows = table.map(splitTableRow);
+    const hasHeader = rows.length >= 2 && isTableSeparator(table[1]);
+    const headerCells = hasHeader ? rows[0] : [];
+    const bodyRows = hasHeader ? rows.slice(2) : rows;
+    const thead = hasHeader
+      ? `<thead><tr>${headerCells.map((cell) => `<th>${renderInline(cell)}</th>`).join("")}</tr></thead>`
+      : "";
+    const tbodyRows = (bodyRows.length ? bodyRows : hasHeader ? [rows[0]] : [])
+      .map((cells) => `<tr>${cells.map((cell) => `<td>${renderInline(cell)}</td>`).join("")}</tr>`)
+      .join("");
+
+    html.push(`<table>${thead}<tbody>${tbodyRows}</tbody></table>`);
+    table = [];
   }
 
   function flushQuote() {
@@ -160,6 +210,7 @@ function renderMarkdown(markdown) {
   function flushAll() {
     flushParagraph();
     flushList();
+    flushTable();
     flushQuote();
   }
 
@@ -183,8 +234,23 @@ function renderMarkdown(markdown) {
     }
 
     if (!line.trim()) {
-      flushAll();
+      flushParagraph();
+      flushTable();
+      flushQuote();
+      if (list.type && list.items.length) {
+        list.pendingBreak = true;
+      } else {
+        flushList();
+      }
       continue;
+    }
+
+    const isUnorderedListItem = /^[-*] /.test(line);
+    const isOrderedListItem = /^\d+[.)] /.test(line);
+    const isListContinuation = list.type && /^\s{2,}\S/.test(line);
+
+    if (list.pendingBreak && !isUnorderedListItem && !isOrderedListItem && !isListContinuation) {
+      flushList();
     }
 
     if (line.startsWith("### ")) {
@@ -205,17 +271,57 @@ function renderMarkdown(markdown) {
       continue;
     }
 
-    if (/^[-*] /.test(line)) {
+    if (/^(-{3,}|\*{3,}|_{3,})$/.test(line.trim())) {
+      flushAll();
+      html.push("<hr>");
+      continue;
+    }
+
+    if (isUnorderedListItem) {
       flushParagraph();
       flushQuote();
-      list.push(line.replace(/^[-*] /, "").trim());
+      flushTable();
+      if (list.type && list.type !== "unordered") {
+        flushList();
+      }
+      list.type = "unordered";
+      list.pendingBreak = false;
+      list.items.push([line.replace(/^[-*] /, "").trim()]);
+      continue;
+    }
+
+    if (isOrderedListItem) {
+      flushParagraph();
+      flushQuote();
+      flushTable();
+      if (list.type && list.type !== "ordered") {
+        flushList();
+      }
+      list.type = "ordered";
+      list.pendingBreak = false;
+      list.items.push([line.replace(/^\d+[.)] /, "").trim()]);
+      continue;
+    }
+
+    if (isTableRow(line)) {
+      flushParagraph();
+      flushList();
+      flushQuote();
+      table.push(line.trim());
       continue;
     }
 
     if (line.startsWith(">")) {
       flushParagraph();
       flushList();
+      flushTable();
       quote.push(line.replace(/^>\s?/, "").trim());
+      continue;
+    }
+
+    if (isListContinuation) {
+      list.pendingBreak = false;
+      list.items[list.items.length - 1].push(line.trim());
       continue;
     }
 

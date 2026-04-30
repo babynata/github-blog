@@ -1,5 +1,29 @@
 [
   {
+    "title": "从打车 Agent 出发，怎么判断一款 App 该不该上 Agent",
+    "slug": "how-to-judge-if-an-app-should-use-agent",
+    "date": "2026.04.30",
+    "rawDate": "2026-04-30",
+    "updatedAt": "2026.04.30",
+    "readTime": "10 min",
+    "tags": [
+      "AI",
+      "Agent",
+      "产品",
+      "App 设计",
+      "交互"
+    ],
+    "status": "published",
+    "category": "AI / 产品",
+    "summary": "一篇由打车 Agent 引出的产品思考：只有当需求模糊、决策复杂、上下文持续、跨系统编排和异常频发时，Agent 才比传统 App 更有结构性价值。",
+    "description": "从一篇打车 Agent 调优文章和一段与 Kimi 的对话出发，梳理判断一款 App 有没有上 Agent 价值的结构化方法。",
+    "href": "posts/how-to-judge-if-an-app-should-use-agent.html",
+    "generatedPath": "posts/how-to-judge-if-an-app-should-use-agent.html",
+    "sourcePath": "content/posts/how-to-judge-if-an-app-should-use-agent.md",
+    "sourceHref": "content/posts/how-to-judge-if-an-app-should-use-agent.md",
+    "note": "正文按原始记录发布，仅补充博客所需元信息。"
+  },
+  {
     "title": "判断一个 Agent 的核心竞争力时，我为什么更看重 Harness",
     "slug": "agent-harness-core-competitiveness",
     "date": "2026.04.29",

@@ -940,13 +940,55 @@ p {
   font-size: 1.75rem;
 }
 
-.article-content ul {
+.article-content ul,
+.article-content ol {
   margin: 0;
   padding-left: 1.25rem;
 }
 
 .article-content li + li {
   margin-top: 0.5rem;
+}
+
+.article-content hr {
+  width: 100%;
+  height: 1px;
+  margin: 0.5rem 0;
+  border: 0;
+  background: rgba(88, 110, 90, 0.14);
+}
+
+.article-content table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(250, 252, 249, 0.94);
+}
+
+.article-content th,
+.article-content td {
+  padding: 0.8rem 0.9rem;
+  border-bottom: 1px solid rgba(88, 110, 90, 0.12);
+  border-right: 1px solid rgba(88, 110, 90, 0.12);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.7;
+}
+
+.article-content th {
+  font-weight: 600;
+  background: rgba(224, 234, 223, 0.42);
+}
+
+.article-content tr:last-child td {
+  border-bottom: 0;
+}
+
+.article-content th:last-child,
+.article-content td:last-child {
+  border-right: 0;
 }
 
 .article-content blockquote {
@@ -1270,5 +1312,9 @@ main > .reveal:nth-child(6) {
 
   .tag-filters {
     width: 100%;
+  }
+
+  .article-content table {
+    font-size: 0.94rem;
   }
 }
