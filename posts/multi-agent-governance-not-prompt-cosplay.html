@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="这篇文章讨论为什么只靠 prompt 做不出真正的 Multi-Agent，以及 Agent 产品化为什么需要从 Prompt Engineering 转向 Agent Governance Engineering。">
+  <meta name="theme-color" content="#dce6da">
+  <title>Multi-Agent 不是角色扮演，而是工程治理 | 青苔手记</title>
+  <link rel="stylesheet" href="../styles.css?v=20260430-1">
+  <script src="../script.js?v=20260430-1" defer></script>
+</head>
+<body class="article-page">
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-copy">
+          <strong>青苔手记</strong>
+          <span>minimal notes for calm building</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="文章导航">
+        <a href="../index.html#posts">文章</a>
+        <a href="../index.html#about">关于</a>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article-shell reveal">
+        <p class="eyebrow">AI / 产品</p>
+        <h1>Multi-Agent 不是角色扮演，而是工程治理</h1>
+        <div class="article-meta">
+          <span>2026.05.18</span><span>9 min</span><span>Agent</span><span>Multi-Agent</span><span>AI产品</span><span>工程治理</span>
+        </div>
+
+        <div class="article-content">
+          <h2>Multi-Agent 不是角色扮演，而是工程治理</h2>
+<p>我越来越明确地感觉到，很多 Multi-Agent 产品的问题，不是 Agent 不够多，而是它们根本没有真正“多”起来。</p>
+<p>表面上，一个系统里有 Planner、Worker、Reviewer、Verifier、Manager，听起来像一个完整团队。但如果这些角色只是靠几段 prompt 区分，共享同一段上下文，用自然语言互相建议，最后仍然由模型自己判断要不要采纳，那它本质上不是 Multi-Agent，而是一个模型在做角色扮演。</p>
+<p>我愿意把这种现象叫作 <strong>Prompt Cosplay</strong>。</p>
+<p>真正的 Multi-Agent，不是让模型“假装”自己有不同角色，而是要在工程层面让不同 Agent 拥有不同目标、不同权限、不同上下文、不同流转规则。换句话说，Agent 的角色差异不能只写在 prompt 里，必须被系统架构硬化下来。</p>
+<p>这才是我从 MiniMax Mavis、Anthropic harness，以及最近这些 Agent 工程实践里看到的关键变化。</p>
+<p>我主要想讲三点：第一，多 Agent 的核心不是分工，而是制衡；第二，只靠 prompt 约束角色，约束力是不够的；第三，模型越强，工程治理反而越重要。</p>
+<h2>多 Agent 的核心不是分工，而是制衡</h2>
+<p>很多人理解 Multi-Agent，会先想到“一个负责规划，一个负责执行，一个负责检查”。这个理解没错，但还不够。因为只要检查者没有真正的门禁权，它就不是检查者，只是一个提建议的人。</p>
+<p>这和软件工程里的代码评审很像。如果 Reviewer 只是说“我建议你改一下”，但代码仍然可以直接合并，那评审只是礼貌流程。只有当 CI 不通过就不能 merge、测试失败就不能上线、权限不足就不能操作生产环境，评审才变成了治理机制。</p>
+<p>Agent 也是一样。</p>
+<p>如果 Worker 做完任务后，Verifier 只能说“这里可能有问题”，但 Worker 可以忽略它，或者系统没有强制重跑机制，那么这个 Verifier 只是 prompt 里的角色，不是系统里的权力节点。</p>
+<p>Anthropic 在 2026 年 3 月发布的 harness 文章里提到过一个很关键的观察：让 Agent 评价自己产出的东西，往往会产生过度正向的判断。它们会很自然地相信自己做得还不错，尤其在设计、产品体验这类没有二元测试结果的任务上更明显。所以 Anthropic 把生成者和评价者拆开，用 evaluator 去跑页面、截图、操作 UI，再按标准打分。</p>
+<p>这个变化的重点不是“多了一个 Agent”，而是 <strong>评价者拿到了独立的验证职责</strong>。</p>
+<p>这说明一个问题：Multi-Agent 的价值不是热闹，而是制造一种模型不能轻易绕过的外部约束。</p>
+<p>如果一个系统里有十个 Agent，但它们共享同一个目标、同一个上下文、同一种自我完成冲动，那它们看起来像团队，实际上更像一个模型在开会。真正的团队不是每个人都说不同的话，而是每个角色都有不同的责任边界。</p>
+<p>所以我现在会把 Multi-Agent 的第一条判断改成：<strong>多 Agent 的核心不是“多人协作”，而是“权力制衡”。</strong></p>
+<h2>只靠 prompt 约束角色，约束力是不够的</h2>
+<p>Prompt 可以告诉一个 Agent：“你要严格检查，不要放过问题。”但 prompt 本质上是软约束。它依赖模型的理解、服从和稳定性。任务越长，上下文越复杂，模型越容易把角色边界弄混。</p>
+<p>这就是为什么真正的 Agent 系统需要工程治理。</p>
+<p>第一层是 <strong>目标治理</strong>。不同 Agent 不能只是名字不同，而是目标真的不同。Worker 的目标是完成任务，Verifier 的目标应该是发现问题。Planner 的目标是拆解路径，Executor 的目标是执行路径，Auditor 的目标是追踪证据。</p>
+<p>如果所有 Agent 的隐含目标都是“让用户满意地看到一个完成结果”，那它们最终会一起滑向同一个方向：尽快给出一个看起来完整的答案。这不是协作，这是合谋。</p>
+<p>第二层是 <strong>权限治理</strong>。一个 Agent 能看什么、能调什么工具、能改什么文件、能不能发起外部动作，都应该被系统明确限制。这件事不能只靠 prompt 说“你不要访问这些信息”。真正的限制应该是物理不可访问。</p>
+<p>Verifier 不该看到 Worker 的完整思考过程，就不要把那段上下文传给它。一个只负责生成方案的 Agent，不该拥有直接执行生产操作的工具权限，就不要把工具挂给它。权限治理的核心不是信任模型，而是减少需要信任模型的地方。</p>
+<p>第三层是 <strong>上下文治理</strong>。很多 Agent 系统会把所有历史对话、所有中间过程、所有工具结果都塞进一个大上下文里，然后期待模型自己分辨什么重要、什么不重要。这在短任务里还能凑合，在长任务里很快就会变成上下文污染。</p>
+<p>上下文不是越多越好。对不同 Agent 来说，正确的上下文应该不同。Worker 需要任务目标、可用工具、当前状态。Verifier 需要验收标准、交付物、测试结果。Planner 需要用户意图、约束条件、历史偏好。Auditor 需要事件日志、决策记录、证据链。</p>
+<p>这其实和企业里的权限系统很像。不是所有人都应该看到所有信息。信息隔离不是低效，而是可靠性的前提。</p>
+<p>第四层是 <strong>流转治理</strong>。Multi-Agent 不能只是一群 Agent 在聊天。它应该是一套状态机。任务什么时候进入执行？什么时候提交验收？验收失败后回到哪里？失败几次后升级给人？工具调用失败后是重试、换路径，还是终止？这些都不能留给模型临场发挥。</p>
+<p>模型可以负责生成候选动作，但系统应该负责决定动作能不能进入下一步。</p>
+<p>第五层是 <strong>审计治理</strong>。Agent 做复杂任务时，最怕的不是错，而是错了以后不知道错在哪里。谁做了计划？谁调用了工具？谁改了文件？谁通过了验收？通过依据是什么？失败后重试了几次？有没有跳过某个关键步骤？这些都应该被记录下来。</p>
+<p>没有审计，Agent 系统就很难进入企业。因为企业不只关心“结果对不对”，还关心“结果是怎么来的”。尤其在代码、财务、法务、医疗、销售运营这些场景里，过程不可追溯，结果再漂亮也很难被信任。</p>
+<p>所以，Prompt 可以定义角色的语气，工程治理才能定义角色的权力。Prompt 可以让模型“表现得像”一个 Reviewer，状态机和门禁才能让它“成为”一个 Reviewer。</p>
+<h2>模型越强，工程治理反而越重要</h2>
+<p>这听起来有点反直觉。很多人会以为模型变强以后，Agent 架构会变简单。某种程度上是对的。Anthropic 的 harness 文章也提到，随着模型能力增强，某些原本需要额外脚手架的地方可以被简化。</p>
+<p>但这不意味着治理不重要。恰恰相反，模型越能自主执行，越需要系统知道什么时候该信它，什么时候该拦它。</p>
+<p>一个只能回答问题的模型，最多答错。一组能调用工具、改文件、操作网页、写代码、发消息的 Agent，如果没有治理，错误就会变成行动。行动一旦进入真实系统，风险就不再是“文本质量问题”，而是权限、成本、数据、业务流程和责任归属问题。</p>
+<p>这也是为什么我不再把 Multi-Agent 理解成“多个智能体协作”，而更愿意理解成 <strong>把智能体放进一个可治理的组织结构里</strong>。</p>
+<p>组织结构的关键不是每个人都很聪明，而是每个人知道自己能做什么、不能做什么，出了问题谁负责，什么情况下必须停下来。</p>
+<p>这和后端工程非常像。微服务不是把一个应用拆成十个服务就完了。真正困难的是服务边界、鉴权、熔断、重试、链路追踪、幂等、事务补偿。Multi-Agent 也一样。Agent 拆出来只是第一步，难的是治理它们之间的关系。</p>
+<p>这也是为什么我觉得 <strong>Agent Governance Engineering</strong> 会变得越来越重要。它不是一个好听的新词，而是 Agent 产品化的必经之路。</p>
+<p>Prompt Engineering 解决的是“怎么让模型更好地理解任务”。Agent Governance Engineering 解决的是“怎么让模型在系统里可靠地承担责任”。</p>
+<p>前者更像沟通技巧，后者更像组织设计和软件架构。</p>
+<h2>真正的产品机会在治理层</h2>
+<p>如果一个 Multi-Agent 产品只是在界面上放了几个角色头像，让它们轮流说话，我会把它看成早期交互实验。它可能有体验价值，但还不是可靠系统。</p>
+<p>如果一个 Multi-Agent 产品开始认真处理权限、上下文、验收、重试、审计和责任边界，那它才真正进入了 Agent 产品化的深水区。</p>
+<p>这件事对 AI 产品经理尤其重要。</p>
+<p>因为 Agent 产品的难点，正在从“让模型显得聪明”转向“让聪明的模型受到约束”。谁能把这种约束设计得既不压死能力，又能控制风险，谁就更接近真正的 Agent 产品化。</p>
+<p>所以，Multi-Agent 的未来不是“更多角色”，而是“更硬的制度”。</p>
+<p>一个系统里有十个 Agent，不代表它更可靠。也许它只是十个 prompt 在互相表演。</p>
+<p>一个系统里只有三个 Agent，但它们有清晰权限、独立上下文、强制验收、失败回滚和完整审计，它反而更接近生产级系统。</p>
+<p>最后我想把这个判断收束成三句话：</p>
+<p><strong>Multi-Agent 的关键，不是让多个模型一起说话，而是让多个智能体在一套可治理的制度里工作。</strong></p>
+<p><strong>Prompt 定义角色，工程定义权力。</strong></p>
+<p><strong>只有权力被定义清楚，Agent 才不只是角色扮演。</strong></p>
+<h2>参考来源</h2>
+<ul><li>Anthropic Engineering, <em>Harness design for long-running application development</em>, 2026-03-24, https://www.anthropic.com/engineering/harness-design-long-running-apps 。支撑“generator/evaluator 分离、自评偏乐观、harness 随模型能力演进而变化”的论点。</li><li>Anthropic Engineering, <em>How we built our multi-agent research system</em>, 2025-06-13, https://www.anthropic.com/engineering/multi-agent-research-system 。支撑“多 Agent 生产化需要工程、工具、测试和运行机制”的论点。</li><li>MiniMax API Docs, <em>Multi-Agent Cowork for Complex Tasks</em>, 2026-01-23, https://platform.minimax.io/docs/solutions/eigent 。支撑 MiniMax 对多 Agent 协作、任务监控和复杂任务执行的公开产品方向。</li><li>arXiv / TACL, <em>When Can LLMs Actually Correct Their Own Mistakes? A Critical Survey of Self-Correction of LLMs</em>, 2024, https://arxiv.org/abs/2406.01297 。支撑“纯自我修正不稳定，外部反馈更可靠”的判断。</li></ul>
+        </div>
+
+        <div class="article-end">
+          <a class="back-link" href="../index.html#posts">返回文章列表</a>
+          <span>Prompt 定义角色，工程定义权力。只有权力被定义清楚，Agent 才不只是角色扮演。</span>
+        </div>
+      </article>
+
+      <section class="article-comments-section reveal">
+        <article class="glass-card comments-card">
+          <p class="eyebrow">Comments</p>
+          <h2>评论</h2>
+          <p class="section-copy">
+            欢迎留下你的想法、问题或不同判断。每篇文章都有自己独立的评论区。
+          </p>
+          <div
+            id="article-comments"
+            class="comments-shell"
+            data-comments-term="multi-agent-governance-not-prompt-cosplay"
+            data-comments-title="Multi-Agent 不是角色扮演，而是工程治理"
+            aria-live="polite"
+          ></div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© <span data-year></span> 青苔手记</span>
+      <span class="visitor-counter">访问计数 <strong data-visitor-count>加载中</strong></span>
+      <span>个人写作，持续更新</span>
+    </footer>
+  </div>
+</body>
+</html>

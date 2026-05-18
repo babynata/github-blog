@@ -1,5 +1,28 @@
 window.BLOG_POSTS = [
   {
+    "title": "Multi-Agent 不是角色扮演，而是工程治理",
+    "slug": "multi-agent-governance-not-prompt-cosplay",
+    "date": "2026.05.18",
+    "rawDate": "2026-05-18",
+    "updatedAt": "2026.05.18",
+    "readTime": "9 min",
+    "tags": [
+      "Agent",
+      "Multi-Agent",
+      "AI产品",
+      "工程治理"
+    ],
+    "status": "published",
+    "category": "AI / 产品",
+    "summary": "真正的 Multi-Agent 不只是多个角色轮流说话，而是用权限、上下文、状态机和审计把模型放进可治理的系统。",
+    "description": "这篇文章讨论为什么只靠 prompt 做不出真正的 Multi-Agent，以及 Agent 产品化为什么需要从 Prompt Engineering 转向 Agent Governance Engineering。",
+    "href": "posts/multi-agent-governance-not-prompt-cosplay.html",
+    "generatedPath": "posts/multi-agent-governance-not-prompt-cosplay.html",
+    "sourcePath": "content/posts/multi-agent-governance-not-prompt-cosplay.md",
+    "sourceHref": "content/posts/multi-agent-governance-not-prompt-cosplay.md",
+    "note": "Prompt 定义角色，工程定义权力。只有权力被定义清楚，Agent 才不只是角色扮演。"
+  },
+  {
     "title": "从打车 Agent 出发，怎么判断一款 App 该不该上 Agent",
     "slug": "how-to-judge-if-an-app-should-use-agent",
     "date": "2026.04.30",
