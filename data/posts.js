@@ -1,5 +1,29 @@
 window.BLOG_POSTS = [
   {
+    "title": "辅助 Openclaw 定时任务稳定运行的 Skill",
+    "slug": "openclaw-cron-state-manager",
+    "date": "2026.05.26",
+    "rawDate": "2026-05-26",
+    "updatedAt": "2026.05.26",
+    "readTime": "4 min",
+    "tags": [
+      "Openclaw",
+      "Skill",
+      "定时任务",
+      "Agent",
+      "状态管理"
+    ],
+    "status": "published",
+    "category": "AI / 工具",
+    "summary": "我为 Openclaw 定时任务设计了一套稳定运行机制，用隔离执行、读写分离、原子保护、完整监控和精准重启来减少长期运行中的不确定性。",
+    "description": "这篇文章介绍 cron-state-manager 如何辅助 Openclaw 定时任务稳定运行，包括独立 Agent 执行、状态读写分离、原子写入、日志监控、不猜数据和进程探活等机制。",
+    "href": "posts/openclaw-cron-state-manager.html",
+    "generatedPath": "posts/openclaw-cron-state-manager.html",
+    "sourcePath": "content/posts/openclaw-cron-state-manager.md",
+    "sourceHref": "content/posts/openclaw-cron-state-manager.md",
+    "note": "这是一次围绕 Openclaw 定时任务稳定性的实践总结。"
+  },
+  {
     "title": "Multi-Agent 不是角色扮演，而是工程治理",
     "slug": "multi-agent-governance-not-prompt-cosplay",
     "date": "2026.05.18",

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="这篇文章介绍 cron-state-manager 如何辅助 Openclaw 定时任务稳定运行，包括独立 Agent 执行、状态读写分离、原子写入、日志监控、不猜数据和进程探活等机制。">
+  <meta name="theme-color" content="#dce6da">
+  <title>辅助 Openclaw 定时任务稳定运行的 Skill | 青苔手记</title>
+  <link rel="stylesheet" href="../styles.css?v=20260430-1">
+  <script src="../script.js?v=20260430-1" defer></script>
+</head>
+<body class="article-page">
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-copy">
+          <strong>青苔手记</strong>
+          <span>minimal notes for calm building</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="文章导航">
+        <a href="../index.html#posts">文章</a>
+        <a href="../index.html#about">关于</a>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article-shell reveal">
+        <p class="eyebrow">AI / 工具</p>
+        <h1>辅助 Openclaw 定时任务稳定运行的 Skill</h1>
+        <div class="article-meta">
+          <span>2026.05.26</span><span>4 min</span><span>Openclaw</span><span>Skill</span><span>定时任务</span><span>Agent</span><span>状态管理</span>
+        </div>
+
+        <div class="article-content">
+          <blockquote>Skill 仓库：https://github.com/babynata/cron-state-manager</blockquote>
+<p>我在使用 Openclaw 上的高频场景一般是一些<strong>定时任务</strong>：每日推送、状态追踪、定时提醒。在长时间高度使用后，我发现了一些稳定性方面的问题：</p>
+<ol><li><strong>任务没执行</strong>，发现后多次需要通过重启 gateway 才能解决</li><li><strong>任务执行报错</strong>，且排查和解决机制较弱，需要多轮引导才能解决</li><li><strong>任务上下文混乱</strong>，一些需要记录状态的任务会搞错记录顺序甚至丢失记录</li></ol>
+<p>为了解决以上问题，我设计了一些机制去保证任务能长时间稳定运行。</p>
+<h2>1. 每次执行开新 Agent，互不干扰</h2>
+<p>定时任务每次调度时，会单独 spawn 一个临时 Agent 来处理本次任务。这个临时 Agent 拥有独立上下文，跑完就销毁，不会影响主会话，也不会影响其他定时任务。</p>
+<p>就算某个任务挂了，也是它自己挂，不会拖垮全局。</p>
+<h2>2. 状态读写分清楚，谁写谁读不打架</h2>
+<p>有状态任务容易乱，根源在于多个 Agent 同时读写同一个状态文件。我的方案是：<strong>Worker 只读不写，主会话只写不读</strong>。Worker 生成内容时读取状态文件，用户回复后由主会话来更新状态。</p>
+<p>两边各干各的，就不会出现记录顺序错乱甚至丢失的情况。</p>
+<p>同时，Worker 不碰 memory 目录，人类记忆和任务状态彻底分开，上下文不会互相污染。</p>
+<h2>3. 写文件时先写草稿再替换，绝不写坏</h2>
+<p>状态文件如果被多个进程同时读写，很容易损坏变成半截 JSON。我的做法是先写到临时文件，确认写完整了，再加锁替换原文件。</p>
+<p>读的时候也有锁保护，冲突了就自动重试几次。就算读写撞上了，文件也不会坏；真读不出来就返回空值，任务照样能跑下去，不会直接崩溃。</p>
+<h2>4. 执行过程全记录，出了问题翻日志就能定位</h2>
+<p>以前任务报错排查很费劲，要反复引导用户看这里看那里。现在每个任务执行时，stdout、stderr、耗时、退出状态都会自动记录到日志文件里。</p>
+<p>所有任务的运行状态汇总在一个看板文件中，连续失败 3 次以上会自动告警。消息发送后也单独记录 delivery 状态，发了还是没发一目了然。</p>
+<p>出了问题直接翻日志，不再需要多轮引导排查。</p>
+<h2>5. 状态不猜不填，用户没说的就是没发生</h2>
+<p>一个很容易被忽视的问题是：系统会自动帮用户“填默认值”，比如默认用户喝了 500ml 水，或者根据时间推算应该喝了多少。这样会导致状态失真，后续数据全错。</p>
+<p>我的原则是：<strong>用户没有主动回复确认的数据，绝不自动填充</strong>。用户说喝了多少就记多少，用户没说话就保持空白。</p>
+<p>保证状态记录准确可信，后续基于此生成的内容才不会跑偏。</p>
+<h2>6. 先看进程在不在，再决定要不要重启</h2>
+<p>以前任务没执行，第一反应就是重启 gateway，其实很多时候 gateway 进程还在，只是某个配置警告导致退出码非零。</p>
+<p>我现在用进程探活来判断 gateway 到底挂没挂，而不是只看退出码。这样可以避免盲目重启，减少不必要的操作。</p>
+<h2>写在最后</h2>
+<p>以上就是我为 Openclaw 定时任务设计的稳定运行机制。核心思路很简单：<strong>隔离执行、读写分离、原子保护、完整监控、不猜数据、精准重启</strong>。</p>
+<p>如果你也在用 Openclaw 跑定时任务，并且遇到过类似的稳定性困扰，欢迎试试这个方案。</p>
+<p><strong>GitHub 仓库：</strong> https://github.com/babynata/cron-state-manager</p>
+        </div>
+
+        <div class="article-end">
+          <a class="back-link" href="../index.html#posts">返回文章列表</a>
+          <span>这是一次围绕 Openclaw 定时任务稳定性的实践总结。</span>
+        </div>
+      </article>
+
+      <section class="article-comments-section reveal">
+        <article class="glass-card comments-card">
+          <p class="eyebrow">Comments</p>
+          <h2>评论</h2>
+          <p class="section-copy">
+            欢迎留下你的想法、问题或不同判断。每篇文章都有自己独立的评论区。
+          </p>
+          <div
+            id="article-comments"
+            class="comments-shell"
+            data-comments-term="openclaw-cron-state-manager"
+            data-comments-title="辅助 Openclaw 定时任务稳定运行的 Skill"
+            aria-live="polite"
+          ></div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© <span data-year></span> 青苔手记</span>
+      <span class="visitor-counter">访问计数 <strong data-visitor-count>加载中</strong></span>
+      <span>个人写作，持续更新</span>
+    </footer>
+  </div>
+</body>
+</html>
